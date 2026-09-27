@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Dear Ma'am MARYAM!</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Sacramento&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loader">
+    <div class="loader-flower">🌸</div>
+    <!-- EDIT THIS TEXT -->
+    <div class="loader-text">Made with love & respect</div>
+  </div>
+
+  <!-- Background Ambient Particles -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Navigation -->
+  <header class="nav-header">
+    <a href="#home" class="nav-logo">Ma'am's Birthday ✨</a>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#message">Message</a></li>
+      <li><a href="#special">Special</a></li>
+      <li><a href="#appreciation">Appreciation</a></li>
+      <li><a href="#letter">Letter</a></li>
+      <li><a href="#cake">Cake</a></li>
+      <li><a href="#wishes">Wishes</a></li>
+    </ul>
+  </header>
+
+  <!-- PAGE 1 — WELCOME -->
+  <section id="home">
+    <div class="reveal">
+      <!-- EDIT THIS TEXT -->
+      <div class="hero-subtitle-top">Special Wishes</div>
+      <h1 class="hero-title">Happy Birthday, Dear Ma'am MARYAM!</h1>
+      <p class="hero-desc">A little birthday surprise crafted with gratitude for a wonderful teacher...</p>
+      <a href="#message" class="btn">Open Your Surprise →</a>
+    </div>
+    <div class="hero-footer">Made with respect & lots of good wishes ♡</div>
+  </section>
+
+  <!-- PAGE 2 — BIRTHDAY MESSAGE -->
+  <section id="message">
+    <h2 class="section-title reveal">A Birthday Message For You</h2>
+    <p class="section-subtitle reveal">Warm thoughts on your special day</p>
+    
+    <div class="glass-card msg-card reveal">
+      <span class="msg-quote">“</span>
+      <!-- EDIT THIS TEXT -->
+      <p class="msg-text">
+        Wishing you a magnificent birthday, Ma'am! May your special day be overflowing with joy, peaceful moments, and all the happiness you so effortlessly bring into the classroom every day. We are endlessly grateful for your guidance and support.
+      </p>
+    </div>
+    <a href="#special" class="btn reveal" style="margin-top: 2rem;">Next Surprise →</a>
+  </section>
+
+  <!-- PAGE 3 — WHAT MAKES YOU SPECIAL -->
+  <section id="special">
+    <h2 class="section-title reveal">What Makes You Special ✨</h2>
+    <p class="section-subtitle reveal">A few qualities we truly admire about you</p>
+
+    <div class="special-grid">
+      <!-- Card 1 -->
+      <div class="glass-card special-card reveal">
+        <div class="special-icon">📖</div>
+        <!-- EDIT THIS TEXT -->
+        <h3>Amazing Teacher</h3>
+        <p>Your way of teaching makes learning feel completely effortless and truly meaningful.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="glass-card special-card reveal">
+        <div class="special-icon">💐</div>
+        <!-- EDIT THIS TEXT -->
+        <h3>Kind & Supportive</h3>
+        <p>Your kindness and supportive nature create a difference every single day.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="glass-card special-card reveal">
+        <div class="special-icon">🌷</div>
+        <!-- EDIT THIS TEXT -->
+        <h3>Understanding</h3>
+        <p>Your gentle understanding makes every student feel truly valued and comfortable.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="glass-card special-card reveal">
+        <div class="special-icon">⭐</div>
+        <!-- EDIT THIS TEXT -->
+        <h3>Inspiring</h3>
+        <p>Your passion and dedication inspire us to work harder and reach our potential.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="glass-card special-card reveal">
+        <div class="special-icon">✨</div>
+        <!-- EDIT THIS TEXT -->
+        <h3>Positive Personality</h3>
+        <p>Your bright and cheerful energy makes your presence genuinely memorable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 4 — A LITTLE APPRECIATION NOTE -->
+  <section id="appreciation">
+    <h2 class="section-title reveal">A Little Appreciation Note 💐</h2>
+    <p class="section-subtitle reveal">From the bottom of our hearts</p>
+
+    <div class="note-container reveal">
+      <div class="note-dec-top">❀</div>
+      <!-- EDIT THIS TEXT -->
+      <p class="note-text">
+        "Some teachers simply teach from a book, while others make their students feel encouraged, understood, and confident. I feel genuinely grateful to have a teacher like you. Even though our journey together is just beginning, your kindness and warmth already make you someone deeply worth appreciating."
+      </p>
+      <div class="note-dec-bottom">❀</div>
+    </div>
+    <a href="#letter" class="btn reveal" style="margin-top: 2.5rem;">Read Letter →</a>
+  </section>
+
+  <!-- PAGE 5 — LETTER FOR MA'AM -->
+  <section id="letter">
+    <h2 class="section-title reveal">A Letter For You</h2>
+    <p class="section-subtitle reveal">There's a little letter waiting for you...</p>
+
+    <div class="envelope-wrapper reveal" id="open-envelope-btn">
+      <div class="envelope">
+        <div class="envelope-flap"></div>
+        <!-- EDIT THIS TEXT -->
+        <span class="envelope-txt">Open Me 💌</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Letter Modal -->
+  <div class="modal-overlay" id="letter-modal-overlay">
+    <div class="letter-modal">
+      <!-- EDIT THIS TEXT -->
+      <h3 class="letter-header">Dear Ma'am MARYAM,</h3>
+      <div class="letter-body">
+        <p>I wanted to take this special occasion to express my sincere appreciation for you.</p><br>
+        <p>Even though our college journey has just started, your enthusiasm, patience, and encouraging attitude have already made a lasting positive impression on us.</p><br>
+        <p>Thank you for creating an environment where learning feels wonderful. May your birthday be as incredible and bright as the wisdom you share with us!</p>
+      </div>
+      <!-- EDIT THIS TEXT (YOUR NAME) -->
+      <div class="letter-footer">
+        With lots of respect and warm wishes,<br>
+        <strong>[MAHNOOR]</strong>
+      </div>
+      <button class="btn close-modal-btn" id="close-letter-btn">Continue →</button>
+    </div>
+  </div>
+
+  <!-- PAGE 6 — BIRTHDAY CAKE -->
+  <section id="cake">
+    <h2 class="section-title reveal">Make A Wish, Ma'am! 🎂</h2>
+    <p class="section-subtitle reveal">Blow out the candle to reveal your birthday wish</p>
+
+    <div class="cake-container reveal">
+      <div class="candle">
+        <div class="flame" id="flame"></div>
+      </div>
+      <div class="cake"></div>
+    </div>
+
+    <button class="btn reveal" id="wish-btn">Make A Wish ✨</button>
+    
+    <!-- EDIT THIS TEXT -->
+    <div class="wish-revealed-msg" id="wish-msg">
+      ✨ May all your beautiful wishes come true! ✨
+    </div>
+
+    <a href="#wishes" class="btn reveal" id="cake-next-btn" style="margin-top: 1.5rem; display: none;">Continue →</a>
+  </section>
+
+  <!-- PAGE 7 — BIRTHDAY WISHES -->
+  <section id="wishes">
+    <h2 class="section-title reveal">Wishes Just For You 🌸</h2>
+    <p class="section-subtitle reveal">Sending blessing cards your way</p>
+
+    <div class="wishes-grid">
+      <!-- EDIT THIS TEXT IN WISH CARDS -->
+      <div class="wish-card reveal">May your days always be filled with bright happiness and laughter.</div>
+      <div class="wish-card reveal">May success follow you in every endeavor you undertake.</div>
+      <div class="wish-card reveal">May you always have countless reasons to smile.</div>
+      <div class="wish-card reveal">May your kindness return to you in countless beautiful ways.</div>
+      <div class="wish-card reveal">May the coming year bring you peace, health, and abundant blessings.</div>
+      <div class="wish-card reveal">May you continue inspiring everyone around you effortlessly.</div>
+    </div>
+
+    <a href="#final" class="btn reveal" style="margin-top: 3rem;">Final Surprise →</a>
+  </section>
+
+  <!-- PAGE 8 — FINAL SURPRISE -->
+  <section id="final">
+    <div class="glass-card final-card reveal">
+      <!-- EDIT THIS TEXT -->
+      <h2 class="final-title">Happy Birthday Once Again, Ma'am MARYAM! 🎉</h2>
+      <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.8;">
+        Thank you for being such an exceptional teacher. Wishing you a beautiful birthday filled with happiness, peace, success, and endless blessings. May this new chapter bring you wonderful moments and continuous reasons to smile!
+      </p>
+      <!-- EDIT THIS TEXT (YOUR NAME) -->
+      <div class="final-sign">
+        With Respect & Best Wishes,<br>
+        MAHNOOR
+      </div>
+    </div>
+
+    <a href="#home" class="btn reveal">Replay The Surprise ↻</a>
+  </section>
+
+  <!-- External JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

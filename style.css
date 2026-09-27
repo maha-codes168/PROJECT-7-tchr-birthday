@@ -1,0 +1,618 @@
+/* ==========================================================================
+   1. VARIABLES & BASE STYLES
+   ========================================================================== */
+:root {
+  --bg-cream: #FAF7F2;
+  --bg-pastel-pink: #FBF0F3;
+  --bg-lavender: #F3EFF7;
+  --primary-pink: #E8A5B8;
+  --deep-rose: #8C4A5A;
+  --text-main: #4A3E43;
+  --text-muted: #7A6B71;
+  --accent-gold: #D4AF37;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.9);
+  --glass-shadow: 0 10px 30px rgba(140, 74, 90, 0.06);
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-script: 'Sacramento', cursive;
+  --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Ambient Particles */
+#particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   2. TYPOGRAPHY & REUSABLE UI
+   ========================================================================== */
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--deep-rose);
+  font-weight: 700;
+}
+
+.section-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 3rem;
+  font-weight: 300;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #FFF 0%, var(--bg-pastel-pink) 100%);
+  border: 1px solid var(--accent-gold);
+  color: var(--deep-rose);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+  transition: var(--transition);
+  text-decoration: none;
+  user-select: none;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25);
+  background: var(--deep-rose);
+  color: #FFF;
+  border-color: var(--deep-rose);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+  padding: 2.5rem;
+  transition: var(--transition);
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(140, 74, 90, 0.12);
+}
+
+section {
+  min-height: 100vh;
+  padding: 100px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   3. NAVIGATION
+   ========================================================================== */
+.nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background: rgba(250, 247, 242, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.nav-logo {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--deep-rose);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--deep-rose);
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-gold);
+  border-radius: 2px;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background-color: var(--deep-rose);
+  transition: var(--transition);
+}
+
+/* ==========================================================================
+   4. LOADING SCREEN
+   ========================================================================== */
+#loader {
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg-cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.loader-flower {
+  font-size: 3rem;
+  animation: spinFlower 4s infinite linear;
+}
+
+.loader-text {
+  margin-top: 15px;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--deep-rose);
+  letter-spacing: 1px;
+}
+
+@keyframes spinFlower {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   PAGE 1 — WELCOME
+   ========================================================================== */
+#home {
+  text-align: center;
+  background: radial-gradient(circle at center, var(--bg-pastel-pink) 0%, var(--bg-cream) 70%);
+}
+
+.hero-subtitle-top {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: var(--deep-rose);
+  margin-bottom: -10px;
+}
+
+.hero-title {
+  font-size: clamp(2.8rem, 7vw, 4.8rem);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.hero-desc {
+  max-width: 500px;
+  color: var(--text-muted);
+  margin: 0 auto 2.5rem;
+  font-size: 1.05rem;
+}
+
+.hero-footer {
+  position: absolute;
+  bottom: 20px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   PAGE 2 — BIRTHDAY MESSAGE
+   ========================================================================== */
+.msg-card {
+  max-width: 700px;
+  text-align: center;
+  position: relative;
+}
+
+.msg-quote {
+  font-size: 3rem;
+  color: var(--accent-gold);
+  line-height: 0;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.msg-text {
+  font-size: 1.15rem;
+  color: var(--text-main);
+  line-height: 1.8;
+  min-height: 120px;
+}
+
+/* ==========================================================================
+   PAGE 3 — WHAT MAKES YOU SPECIAL
+   ========================================================================== */
+.special-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.special-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+.special-icon {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.special-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.special-card p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   PAGE 4 — A LITTLE APPRECIATION NOTE
+   ========================================================================== */
+.note-container {
+  max-width: 800px;
+  position: relative;
+  background: #FFF;
+  border: 1px solid var(--bg-pastel-pink);
+  box-shadow: 0 10px 40px rgba(140, 74, 90, 0.05);
+  padding: 3.5rem 3rem;
+  border-radius: 12px;
+}
+
+.note-dec-top, .note-dec-bottom {
+  position: absolute;
+  font-size: 1.5rem;
+  color: var(--primary-pink);
+}
+
+.note-dec-top { top: 15px; left: 20px; }
+.note-dec-bottom { bottom: 15px; right: 20px; }
+
+.note-text {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: var(--text-main);
+  text-align: center;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   PAGE 5 — LETTER FOR MA'AM (INTERACTIVE ENVELOPE)
+   ========================================================================== */
+.envelope-wrapper {
+  position: relative;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.envelope {
+  width: 280px;
+  height: 180px;
+  background: var(--primary-pink);
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: 140px solid transparent;
+  border-right: 140px solid transparent;
+  border-top: 100px solid #DF95AA;
+  transform-origin: top;
+  transition: transform 0.6s ease;
+  z-index: 3;
+}
+
+.envelope-txt {
+  color: #FFF;
+  font-weight: 600;
+  letter-spacing: 1px;
+  z-index: 2;
+}
+
+.envelope-wrapper:hover .envelope {
+  transform: translateY(-5px);
+}
+
+/* Letter Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.letter-modal {
+  background: #FFF;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 16px;
+  padding: 3rem;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  transform: translateY(30px);
+  transition: var(--transition);
+  position: relative;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.modal-overlay.active .letter-modal {
+  transform: translateY(0);
+}
+
+.letter-header {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.letter-body {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+}
+
+.letter-footer {
+  font-weight: 600;
+  color: var(--deep-rose);
+}
+
+.close-modal-btn {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+/* ==========================================================================
+   PAGE 6 — BIRTHDAY CAKE & BLOWOUT
+   ========================================================================== */
+.cake-container {
+  margin: 30px 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cake {
+  width: 200px;
+  height: 120px;
+  background: var(--bg-pastel-pink);
+  border-radius: 10px 10px 0 0;
+  position: relative;
+  border-bottom: 10px solid var(--primary-pink);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.cake::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  left: 20px;
+  width: 160px;
+  height: 30px;
+  background: var(--bg-lavender);
+  border-radius: 10px 10px 0 0;
+}
+
+.candle {
+  width: 12px;
+  height: 40px;
+  background: linear-gradient(to bottom, #FFF, var(--accent-gold));
+  position: absolute;
+  top: -70px;
+  left: 94px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.flame {
+  width: 14px;
+  height: 22px;
+  background: #FFA500;
+  border-radius: 50% 50% 20% 20%;
+  position: absolute;
+  top: -20px;
+  left: -1px;
+  box-shadow: 0 0 10px #FFA500, 0 0 20px #FFD700;
+  animation: flicker 0.6s infinite alternate;
+  transition: opacity 0.5s ease;
+}
+
+.flame.off {
+  opacity: 0;
+}
+
+@keyframes flicker {
+  from { transform: scale(1); }
+  to { transform: scale(1.15); }
+}
+
+.wish-revealed-msg {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: var(--deep-rose);
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  text-align: center;
+}
+
+.wish-revealed-msg.show {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   PAGE 7 — BIRTHDAY WISHES
+   ========================================================================== */
+.wishes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.wish-card {
+  padding: 1.8rem;
+  border-radius: 16px;
+  background: #FFF;
+  border-left: 4px solid var(--primary-pink);
+  font-size: 0.98rem;
+  color: var(--text-main);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+}
+
+/* ==========================================================================
+   PAGE 8 — FINAL SURPRISE
+   ========================================================================== */
+#final {
+  text-align: center;
+  background: radial-gradient(circle at center, var(--bg-pastel-pink) 0%, var(--bg-cream) 80%);
+}
+
+.final-card {
+  max-width: 650px;
+  margin-bottom: 2rem;
+}
+
+.final-title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin-bottom: 1rem;
+}
+
+.final-sign {
+  margin-top: 1.5rem;
+  font-family: var(--font-script);
+  font-size: 2rem;
+  color: var(--deep-rose);
+}
+
+/* ==========================================================================
+   SCROLL ANIMATION UTILITY
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 768px) {
+  .nav-header { padding: 15px 20px; }
+  .hamburger { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 60px;
+    right: -100%;
+    width: 200px;
+    height: calc(100vh - 60px);
+    background: rgba(250, 247, 242, 0.98);
+    flex-direction: column;
+    padding: 30px 20px;
+    transition: var(--transition);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.05);
+  }
+  .nav-links.open { right: 0; }
+  .glass-card { padding: 1.5rem; }
+  .note-container { padding: 2rem 1.5rem; }
+}
